@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-
+#define usage "usage:enter a number should be beteen -3280 and 3280\n"
 /* Pictures of zero, largest positive and largest negative numbers. */
 static const char *pat = "┌───┐\n"
                          "│   │\n"
@@ -35,12 +35,20 @@ static int src = 0, inv = 1;
 
 /* A buffer for the result. */
 static char res[SZP+1];
-
+int flag=1;
 /* Use it like 'echo -42 | ./b3k' */
 int main (int q, char * argv[])
 {
-    scanf("%d", &src);
 
+    while(flag) {
+        printf(usage);
+        scanf("%d", &src);
+        if( src>-3280 && src<3280) {
+            flag=0;
+        }
+
+
+    }
     /* Split the value into its modulus and signed multiplier. */
     if (src < 0)
         src *= inv = -1;
