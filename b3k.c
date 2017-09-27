@@ -43,10 +43,9 @@ int main (int q, char * argv[])
     while(flag) {
         printf(usage);
         scanf("%d", &src);
-        if( src>-3280 && src<3280) {
+        if( src>=-3280 && src<=3280) {
             flag=0;
         }
-
 
     }
     /* Split the value into its modulus and signed multiplier. */
@@ -56,9 +55,13 @@ int main (int q, char * argv[])
     int r;
     struct ds *p;
 
-    for (r = 0; r < SZD; ++r) {
+    p = &digit[0];
+    p->exp=1;
+    p->val = 0;
+
+    for (r = 1; r < SZD; ++r) {
         p = &digit[r];
-        p->exp = r ? (3 * digit[r-1].exp) : 1;
+        p->exp = 3 * digit[r-1].exp;
         p->val = 0;
     }
 
