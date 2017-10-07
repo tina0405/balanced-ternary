@@ -1,6 +1,8 @@
 #include <string.h>
 #include <stdio.h>
 #define usage "usage:enter a number should be beteen -3280 and 3280\n"
+#define EIGHT_BITS_MAX 3280
+#define EIGHT_BITS_MIN -3280
 /* Pictures of zero, largest positive and largest negative numbers. */
 static const char *pat = "┌───┐\n"
                          "│   │\n"
@@ -22,7 +24,7 @@ struct ds {
 } digit[SZD] = {
     { 32, 3 },
     { 26, 6 },
-    { 16, 8 },
+    { 16, 5 },
     { 0, 6 },
     { 6, 3 },
     { 9, 7 },
@@ -43,7 +45,7 @@ int main (int q, char * argv[])
     while(flag) {
         printf(usage);
         scanf("%d", &src);
-        if( src>=-3280 && src<=3280) {
+        if( src>=EIGHT_BITS_MIN && src<=EIGHT_BITS_MAX) {
             flag=0;
         }
 
@@ -67,7 +69,7 @@ int main (int q, char * argv[])
 
     /* Truncate to the largest allowed positive. */
     p = &digit[SZD - 1];
-    r = 3 * p->exp / 2;
+    r = 3 * p->exp;
     if (src > r)
         src = r;
     else
